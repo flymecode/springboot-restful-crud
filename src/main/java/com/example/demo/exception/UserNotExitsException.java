@@ -5,7 +5,8 @@
 
 package com.example.demo.exception;
 
-import com.example.demo.untils.Constant;
+import com.example.demo.utils.Constant;
+
 
 public class UserNotExitsException extends RuntimeException {
 

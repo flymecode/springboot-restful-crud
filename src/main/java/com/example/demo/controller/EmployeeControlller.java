@@ -9,6 +9,7 @@ import com.example.demo.dao.DepartmentDao;
 import com.example.demo.dao.EmployeeDao;
 import com.example.demo.entitys.Department;
 import com.example.demo.entitys.Employee;
+import com.example.demo.exception.UserNotExitsException;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,10 @@ public class EmployeeControlller {
 	@GetMapping("/emp/{id}")
 	public String toEditPage(@PathVariable("id") Integer id, Model model) {
 		Employee employee = employeeDao.get(id);
+		if (employee == null) {
+			throw new UserNotExitsException();
+		}
 		model.addAttribute("emp", employee);
-
 		//页面要显示所有的部门列表
 		Collection<Department> departments = departmentDao.getDepartments();
 		model.addAttribute("depts", departments);
