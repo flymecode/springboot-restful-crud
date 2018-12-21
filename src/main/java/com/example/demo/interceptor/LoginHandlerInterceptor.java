@@ -5,6 +5,7 @@
 
 package com.example.demo.interceptor;
 
+import com.example.demo.utils.Constants;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		Object user = request.getSession().getAttribute("loginUser");
+		Object user = request.getSession().getAttribute(Constants.SESSION_USER);
 		if (user == null) {
 			request.setAttribute("msg","NO Auth,Please Login In");
 			request.getRequestDispatcher("/index.html").forward(request,response);

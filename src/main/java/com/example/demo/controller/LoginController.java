@@ -8,6 +8,8 @@ package com.example.demo.controller;
 import com.example.demo.entitys.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.Constants;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
+	@ApiImplicitParam
+	@ApiOperation(value = "用户登录跳转页面", notes = "用户登录跳转页面")
 	@GetMapping(value = "/user/login")
 	public String login() throws SQLException {
 		return "login";
@@ -35,8 +39,8 @@ public class LoginController {
 	public String login(User user,Model model, HttpSession session) throws SQLException {
 		User c_user = userService.userLogin(user);
 		if (null != c_user) {
-			session.setAttribute(Constants.SESSION_USER, user);
-			return "redirect:/index";
+			session.setAttribute(Constants.SESSION_USER, c_user);
+			return "redirect:/index.html";
 		}
 		model.addAttribute("msg", "Login Not Success");
 		return "login";
