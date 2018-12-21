@@ -28,8 +28,8 @@
                     <li><a href="${pageContext.request.contextPath}/seckill?method=list"
                            style="font-size: 20px; font-family:bodoni mt black">抢购</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" method="post"
-                      action="${pageContext.request.contextPath}/bookServlet?method=search">
+                <form class="navbar-form navbar-right" method="get"
+                      action="/book/search">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search Book" name="search">
                     </div>
@@ -58,15 +58,14 @@
                             <li role="separator" class="divider"></li>
                             <div href="#" style="background-color:#FCFCFC;" align="center">
                                 <img style="width: 100%" th:src="@{/time/img/cart.png}">
-                                <a href="${pageContext.request.contextPath}/cartServlet?method=toCart">去购物</a>
+                                <a href="/cart">去购物</a>
                             </div>
 
                             <li role="separator" class="divider"></li>
                             <div align="right">
                                 <li>
                                     <a class="btn btn-danger " style="border-radius:15px;margin-right: 10px"
-                                       href="${pageContext.request.contextPath }/cartServlet?method=toCart"><span
-                                            class="glyphicon glyphicon-shopping-cart"></span>去购物车
+                                       href="/tcart"><span class="glyphicon glyphicon-shopping-cart"></span>去购物车
                                     </a>
                                 </li>
                             </div>
@@ -153,29 +152,5 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-<script type="text/javascript">
-    $(function () {
-        var url = "${pageContext.request.contextPath }/bookCategoryServlet";
-        var params = {"method": "findCategory"}
-        $.post(url, params, function (data) {
-            $.each(data, function (i, obj) {
-                var li = "<li><a style='font-size: 20px; font-family:bodoni mt black;' href='${pageContext.request.contextPath }/bookCategoryServlet?method=findBookByTypeId&typeId=" + obj.bookTypeId + "&num=0'>" + obj.bookTypeName + "</a></li>";
-                $("#my_UL").append(li);
-            });
-        }, "json");
-    });
 
-    $(function () {
-        var url = "${pageContext.request.contextPath}/cartServlet";
-        var params = {"method": "getBookNumber"}
-        $.post(url, params, function (data) {
-            if (data > 0) {
-                $("#cart_number").html(data);
-            } else {
-                $("#cart_number").html(data);
-            }
-        })
-    })
-</script>
 </body>

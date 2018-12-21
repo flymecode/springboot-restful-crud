@@ -17,7 +17,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 		Object user = request.getSession().getAttribute(Constants.SESSION_USER);
 		if (user == null) {
 			request.setAttribute("msg","NO Auth,Please Login In");
-			request.getRequestDispatcher("/index.html").forward(request,response);
+			request.getRequestDispatcher("/login.html").forward(request,response);
 			return false;
 		}
 		return true;
